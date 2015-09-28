@@ -1,0 +1,19 @@
+{
+  "name": "crm",
+  "version": "1.0.0",
+  "description": "customer relations management",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pranava S Balugari <stalin.pranava@gmail.com> (https://github.com/elitenomad/)",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.14.0",
+    "express": "^4.13.3",
+    "jsonwebtoken": "^5.0.5",
+    "mongoose": "^4.1.8",
+    "morgan": "^1.6.1"
+  }
+}

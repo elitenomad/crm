@@ -78,12 +78,34 @@ apiRouter.post('/authenticate', function(req, res){
 });
 
 apiRouter.use(function(req, res, next){
-	console.log("Somebody just came to our app!");
-	next();
+	var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+	if(token){
+		jwt.verify(token, superSecret, function(err, decoded){
+			if(err){
+				return json({
+					success: false,
+					message: 'Your token is wrong!!!'
+				})
+			}else{
+				req.decoded = decoded;
+				next();
+			}
+		});
+	}else{
+		return res.json({
+			success: false,
+			message: 'No token provided'
+		});
+	}
 });
 
 apiRouter.get('/', function(req, res){
 	res.json({ message: 'hooray! welcome to our api!' });
+});
+
+apiRouter.get('/me', function(req, res) { 
+	res.send(req.decoded);
 });
 
 
@@ -157,6 +179,7 @@ apiRouter.route('/users/:id')
 				})
 			});
 		})
+
 
 
 app.use('/api', apiRouter);
